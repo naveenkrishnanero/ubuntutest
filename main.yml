@@ -12,11 +12,16 @@
        - 'auditd'   
 
    - name: Adding the required Rules for Audit into /etc/audit/audit.rules
-     loop: "{{ audit_rules }}" # The variable is declared in vars.yml
+     loop: "{{ audit_rules }}" # The variable is declared in ubuntuvars.yml
      lineinfile:
         line: "{{ item }}"
         state: present
         path: '/etc/audit/audit.rules'
+
+   - name: Restart audit.servive
+     service:
+       name: auditd.service
+       state: restarted     
         
        
         
