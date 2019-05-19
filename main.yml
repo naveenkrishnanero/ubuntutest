@@ -1,5 +1,7 @@
 ---
  - hosts: all
+   vars_files:
+     - ubuntuvars.yml
    tasks:
    - name: Install audit.service in case not present
      apt:
@@ -10,10 +12,11 @@
        - 'auditd'   
 
    - name: Adding the required Rules for Audit into /etc/audit/audit.rules
-     loop: "{{ audit_rules}}" # The variable is declared in vars.yml
+     loop: "{{ audit_rules }}" # The variable is declared in vars.yml
      lineinfile:
         line: "{{ item }}"
         state: present
+        path: '/etc/audit/audit.rules'
         
        
         
