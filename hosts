@@ -1,0 +1,9 @@
+[all]
+127.0.0.1
+
+
+[all:vars]
+ansible_connection=local 
+ansible_user=naveen 
+ansible_become_password=naveen
+ansible_become=true

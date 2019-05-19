@@ -1,0 +1,20 @@
+---
+ - hosts: all
+   tasks:
+   - name: Install audit.service in case not present
+     apt:
+        name: "{{ item }}"
+        state: present
+     loop:
+       - 'audispd-plugins'
+       - 'auditd'   
+
+   - name: Adding the required Rules for Audit into /etc/audit/audit.rules
+     loop: "{{ audit_rules}}" # The variable is declared in vars.yml
+     lineinfile:
+        line: "{{ item }}"
+        state: present
+        
+       
+        
+         
